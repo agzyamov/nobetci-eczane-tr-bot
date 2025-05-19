@@ -5,6 +5,7 @@ from fastapi import FastAPI, Request
 from bot import bot, dp, WEBHOOK_URL
 
 app = FastAPI()
+print("✅ FastAPI app initialized")
 
 @app.on_event("startup")
 async def on_startup():
