@@ -2,7 +2,7 @@ import os
 print("RAILWAY WORKDIR:", os.getcwd())
 
 from fastapi import FastAPI, Request
-from bot import bot, dp, WEBHOOK_URL
+from app.bot import bot, dp, WEBHOOK_URL
 
 app = FastAPI()
 print("✅ FastAPI app initialized")
