@@ -2,6 +2,7 @@ import os
 from aiogram import Bot, Dispatcher, types
 from aiogram import Router
 from aiogram.types import Message
+from aiogram.filters import Command
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -18,7 +19,7 @@ dp = Dispatcher()
 
 router = Router()
 
-@router.message(commands=["start"])
+@router.message(Command("start"))
 async def handle_start(msg: Message):
     await msg.answer("Привет! Я помогу найти дежурные аптеки в Турции 🏥")
 
