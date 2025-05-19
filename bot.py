@@ -1,5 +1,6 @@
 import os
 from aiogram import Bot, Dispatcher, types
+from aiogram import Router
 from aiogram.types import Message
 from dotenv import load_dotenv
 
@@ -11,9 +12,14 @@ WEBHOOK_URL = os.getenv("WEBHOOK_URL")
 if BOT_TOKEN is None:
     raise ValueError("BOT_TOKEN environment variable is not set")
 
+
 bot = Bot(token=BOT_TOKEN)
 dp = Dispatcher()
 
-@dp.message_handler(commands=["start"])
+router = Router()
+
+@router.message(commands=["start"])
 async def handle_start(msg: Message):
     await msg.answer("Привет! Я помогу найти дежурные аптеки в Турции 🏥")
+
+dp.include_router(router)
