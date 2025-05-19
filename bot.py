@@ -14,11 +14,11 @@ if BOT_TOKEN is None:
     raise ValueError("BOT_TOKEN environment variable is not set")
 
 bot = Bot(token=BOT_TOKEN)
+dp = Dispatcher()
 router = Router()
 
 @router.message(Command("start"))
 async def handle_start(msg: Message):
     await msg.answer("Привет! Я помогу найти дежурные аптеки в Турции 🏥")
 
-dp = Dispatcher()
 dp.include_router(router)

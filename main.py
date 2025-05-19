@@ -21,7 +21,8 @@ async def handle_webhook(request: Request):
     try:
         data = await request.json()
         print("📩 Incoming webhook JSON:", data)
-        await dp.feed_update(bot, data)
+        print("🔄 Dispatching update...")
+        await dp._router.feed_update(bot, data)
     except Exception as e:
         print("❌ Error in handle_webhook:", e)
         return {"ok": False, "error": str(e)}
