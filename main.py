@@ -19,9 +19,13 @@ async def on_shutdown():
 
 @app.post("/")
 async def handle_webhook(request: Request):
-    body = await request.body()
-    print("📩 Incoming webhook data:", body)
-    await dp.feed_raw_update(body, bot)
+    try:
+        body = await request.body()
+        print("📩 Incoming webhook data:", body.decode())
+        await dp.feed_raw_update(body, bot)
+    except Exception as e:
+        print("❌ Error in handle_webhook:", e)
+        return {"ok": False, "error": str(e)}
     return {"ok": True}
 
 @app.get("/")
