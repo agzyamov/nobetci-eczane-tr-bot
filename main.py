@@ -1,6 +1,7 @@
 import os
 
 from fastapi import FastAPI, Request
+from aiogram.types import Update
 from bot import bot, dp, WEBHOOK_URL
 
 app = FastAPI()
@@ -21,8 +22,9 @@ async def handle_webhook(request: Request):
     try:
         data = await request.json()
         print("📩 Incoming webhook JSON:", data)
+        update = Update.model_validate(data)
         print("🔄 Dispatching update...")
-        await dp._router.feed_update(bot, data)
+        await dp.feed_update(bot, update)
     except Exception as e:
         print("❌ Error in handle_webhook:", e)
         return {"ok": False, "error": str(e)}
