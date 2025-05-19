@@ -1,5 +1,4 @@
 import os
-print("RAILWAY WORKDIR:", os.getcwd())
 
 from fastapi import FastAPI, Request
 from bot import bot, dp, WEBHOOK_URL
@@ -20,9 +19,9 @@ async def on_shutdown():
 @app.post("/")
 async def handle_webhook(request: Request):
     try:
-        body = await request.body()
-        print("📩 Incoming webhook data:", body.decode())
-        await dp.feed_raw_update(body, bot)
+        data = await request.json()
+        print("📩 Incoming webhook JSON:", data)
+        await dp.feed_update(bot, data)
     except Exception as e:
         print("❌ Error in handle_webhook:", e)
         return {"ok": False, "error": str(e)}
