@@ -12,7 +12,7 @@ if BOT_TOKEN is None:
     raise ValueError("BOT_TOKEN environment variable is not set")
 
 bot = Bot(token=BOT_TOKEN)
-dp = Dispatcher(bot)
+dp = Dispatcher()
 
 @dp.message_handler(commands=["start"])
 async def handle_start(msg: Message):
