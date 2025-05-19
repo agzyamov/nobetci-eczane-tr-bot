@@ -9,11 +9,13 @@ print("✅ FastAPI app initialized")
 
 @app.on_event("startup")
 async def on_startup():
-    await bot.set_webhook(WEBHOOK_URL)
+    print("✅ Startup triggered")
+    # await bot.set_webhook(WEBHOOK_URL)
 
 @app.on_event("shutdown")
 async def on_shutdown():
-    await bot.delete_webhook()
+    print("👋 Shutdown triggered")
+    # await bot.delete_webhook()
 
 @app.post("/")
 async def handle_webhook(request: Request):
